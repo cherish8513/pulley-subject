@@ -2,15 +2,19 @@ CREATE TABLE tb_problem (
     problem_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     unit_code VARCHAR(20) NOT NULL,
     level INT NOT NULL,
-    type VARCHAR(20) NOT NULL,
+    problem_type VARCHAR(20) NOT NULL,
     answer INT NOT NULL
 );
 
-insert into tb_problem(problem_id, unit_code, level, type, answer) values
+insert into tb_problem(problem_id, unit_code, level, problem_type, answer) values
 (1001,'uc1580',2,'SELECTION',1),
 (1002,'uc1580',2,'SELECTION',1),
 (1003,'uc1580',2,'SELECTION',1),
 (1004,'uc1580',2,'SELECTION',2),
+(1100,'uc1580',1,'SELECTION',2),
+(1101,'uc1580',1,'SELECTION',2),
+(1102,'uc1580',5,'SELECTION',2),
+(1103,'uc1580',5,'SELECTION',2),
 (1005,'uc1580',2,'SELECTION',2),
 (1006,'uc1581',2,'SELECTION',3),
 (1007,'uc1581',2,'SELECTION',2),

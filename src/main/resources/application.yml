@@ -20,10 +20,8 @@ spring:
     url: jdbc:h2:mem:testdb
     username: admin
     password:
+
 logging:
-  level:
-    org:
-      hibernate:
-        type:
-          descriptor:
-            sql: trace
+  level.org.hibernate:
+    SQL: DEBUG
+    orm.jdbc.bind: TRACE
