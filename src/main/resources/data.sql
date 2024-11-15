@@ -6,6 +6,20 @@ CREATE TABLE tb_problem (
     answer INT NOT NULL
 );
 
+CREATE TABLE tb_piece (
+    piece_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    piece_name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE tb_piece_problem (
+    piece_id BIGINT,
+    problem_id BIGINT,
+    FOREIGN KEY (piece_id) REFERENCES tb_piece(piece_id),
+    FOREIGN KEY (problem_id) REFERENCES tb_problem(problem_id),
+    PRIMARY KEY (piece_id, problem_id)
+);
+
 insert into tb_problem(problem_id, unit_code, level, problem_type, answer) values
 (1001,'uc1580',2,'SELECTION',1),
 (1002,'uc1580',2,'SELECTION',1),
