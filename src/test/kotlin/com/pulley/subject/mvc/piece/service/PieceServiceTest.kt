@@ -19,4 +19,28 @@ class PieceServiceTest {
             problemIdList = listOf(1001L, 1002L)
         ))
     }
+
+    @Test
+    fun successAddPieceToStudent() {
+        pieceService.addPieceToStudent(
+            pieceId = 1L,
+            userId = 1L,
+            studentIds = listOf(1L, 2L)
+        )
+    }
+
+    @Test
+    fun successAddDuplicatePieceToStudent() {
+        pieceService.addPieceToStudent(
+            pieceId = 1L,
+            userId = 1L,
+            studentIds = listOf(1L, 2L)
+        )
+
+        pieceService.addPieceToStudent(
+            pieceId = 1L,
+            userId = 1L,
+            studentIds = listOf(1L, 2L)
+        )
+    }
 }

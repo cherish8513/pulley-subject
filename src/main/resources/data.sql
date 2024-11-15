@@ -12,12 +12,21 @@ CREATE TABLE tb_piece (
     piece_name VARCHAR(100) NOT NULL
 );
 
+CREATE INDEX idx_user_id ON tb_piece(user_id);
+
 CREATE TABLE tb_piece_problem (
     piece_id BIGINT,
     problem_id BIGINT,
     FOREIGN KEY (piece_id) REFERENCES tb_piece(piece_id),
     FOREIGN KEY (problem_id) REFERENCES tb_problem(problem_id),
     PRIMARY KEY (piece_id, problem_id)
+);
+
+CREATE TABLE tb_piece_student (
+    piece_id BIGINT,
+    student_id BIGINT,
+    FOREIGN KEY (piece_id) REFERENCES tb_piece(piece_id),
+    PRIMARY KEY (piece_id, student_id)
 );
 
 insert into tb_problem(problem_id, unit_code, level, problem_type, answer) values
@@ -325,3 +334,5 @@ insert into tb_problem(problem_id, unit_code, level, problem_type, answer) value
 (1523,'uc1571',3,'SUBJECTIVE',4),
 (1526,'uc1571',2,'SUBJECTIVE',1),
 (1531,'uc1548',3,'SELECTION',2);
+
+insert into tb_piece(piece_id, user_id, piece_name) values (1, 1, 'test');

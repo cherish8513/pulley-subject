@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface PieceRepository: JpaRepository<TbPiece, Long>
+interface PieceRepository: JpaRepository<TbPiece, Long> {
+    fun findByUserIdAndPieceId(userId: Long, pieceId: Long): TbPiece?
+}
