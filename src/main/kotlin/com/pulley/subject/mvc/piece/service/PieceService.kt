@@ -3,8 +3,7 @@ package com.pulley.subject.mvc.piece.service
 import com.pulley.subject.domain.Yn
 import com.pulley.subject.domain.entity.*
 import com.pulley.subject.mvc.common.assertNotNull
-import com.pulley.subject.mvc.piece.dto.AddPieceDto
-import com.pulley.subject.mvc.piece.dto.SubmittedAnswer
+import com.pulley.subject.mvc.piece.dto.*
 import com.pulley.subject.mvc.piece.repository.PieceProblemRepository
 import com.pulley.subject.mvc.piece.repository.PieceRepository
 import com.pulley.subject.mvc.piece.repository.PieceStudentRepository
@@ -91,6 +90,37 @@ class PieceService(
                     correctYn = if (it.answer == problem.answer) Yn.Y else Yn.N
                 )
             }
+        )
+    }
+
+    fun getAnalyzeReport(pieceId: Long): PieceAnalyzeDto {
+        val reports = pieceRepository.findAnalyzeReports(pieceId = pieceId)
+        val totalProblemCount = problemRepository.findByPieceId(pieceId).size
+
+        return PieceAnalyzeDto(
+            pieceId = pieceId,
+            pieceName = reports.first().pieceName,
+            studentReport = reports
+                .groupBy { it.studentId }
+                .mapNotNull { student ->
+                    if (student.key != null) {
+                        val correctAnswerCount = student.value.filter { it.correctYn == Yn.Y }.size
+                        StudentReport(
+                            studentId = student.key.assertNotNull(),
+                            pieceCorrectRate = (correctAnswerCount * 100.0) / totalProblemCount
+                        )
+                    } else null
+                },
+            problemReport = reports
+                .groupBy { it.problemId }
+                .mapNotNull { problem ->
+                    if (problem.key != null) {
+                        ProblemReport(
+                            problemId = problem.key.assertNotNull(),
+                            problemCorrectRate = (problem.value.filter { it.correctYn == Yn.Y }.size * 100.0) / problem.value.size
+                        )
+                    } else null
+                }
         )
     }
 }

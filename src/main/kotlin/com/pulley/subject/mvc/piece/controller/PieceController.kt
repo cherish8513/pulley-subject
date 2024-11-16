@@ -33,4 +33,9 @@ class PieceController(
     fun checkCorrect(@RequestParam pieceId: Long, @RequestBody requestCheckCorrectDto: RequestCheckCorrectDto): ResponseDto<Unit> {
         return ResponseDto(pieceService.checkCorrect(pieceId = pieceId, studentId = requestCheckCorrectDto.studentId, submittedAnswerList = requestCheckCorrectDto.submittedAnswerList))
     }
+
+    @GetMapping("/analyze")
+    fun getAnalyzeReport(@RequestParam pieceId: Long): ResponseDto<PieceAnalyzeDto> {
+        return ResponseDto(pieceService.getAnalyzeReport(pieceId = pieceId))
+    }
 }

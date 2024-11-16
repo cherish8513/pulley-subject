@@ -355,3 +355,14 @@ insert into tb_piece_problem(piece_id, problem_id) values
 (1, 1518),
 (1, 1522),
 (1, 1526);
+
+insert into tb_solved_problem(student_id, problem_id, submitted_answer, correct_yn) values
+(1, 1531, 2, 'Y'),
+(1, 1522, 4, 'N'),
+(1, 1518, 3, 'N'),
+(1, 1526, 1, 'Y'),
+
+(2, 1526, 3, 'N'),
+(2, 1518, 2, 'Y'),
+(2, 1522, 3, 'Y'),
+(2, 1531, 2, 'Y');

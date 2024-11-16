@@ -78,4 +78,18 @@ class PieceServiceTest {
             ),
         ))
     }
+
+    @Test
+    fun successGetAnalyzeReport() {
+        val result = pieceService.getAnalyzeReport(pieceId = 1L)
+
+        println(result.pieceId)
+        println(result.pieceName)
+        result.problemReport.forEach {
+            println("problemId: ${it.problemId} , correctRate: ${it.problemCorrectRate}")
+        }
+        result.studentReport.forEach {
+            println("studentId: ${it.studentId} , correctRate: ${it.pieceCorrectRate}")
+        }
+    }
 }
