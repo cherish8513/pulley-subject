@@ -29,6 +29,17 @@ CREATE TABLE tb_piece_student (
     PRIMARY KEY (piece_id, student_id)
 );
 
+
+CREATE TABLE tb_solved_problem (
+    solved_problem_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    student_id BIGINT NOT NULL,
+    problem_id BIGINT NOT NULL,
+    submitted_answer INT NOT NULL,
+    correct_yn VARCHAR(10) NOT NULL
+);
+
+CREATE INDEX idx_student_id ON tb_solved_problem(student_id);
+
 insert into tb_problem(problem_id, unit_code, level, problem_type, answer) values
 (1001,'uc1580',2,'SELECTION',1),
 (1002,'uc1580',2,'SELECTION',1),

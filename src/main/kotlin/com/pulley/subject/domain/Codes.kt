@@ -53,3 +53,10 @@ enum class ProblemType(
     SELECTION("객관식"),
     SUBJECTIVE("주관식"),
 }
+
+enum class Yn(
+    override val description: String
+) : ICode {
+    Y("Y"),
+    N("N")
+}

@@ -2,16 +2,12 @@ package com.pulley.subject.mvc.piece.controller
 
 import com.pulley.subject.mvc.common.ResponseDto
 import com.pulley.subject.mvc.piece.dto.AddPieceDto
+import com.pulley.subject.mvc.piece.dto.PieceAnalyzeDto
+import com.pulley.subject.mvc.piece.dto.RequestCheckCorrectDto
 import com.pulley.subject.mvc.piece.service.PieceService
 import com.pulley.subject.mvc.problem.dto.ProblemDto
 import jakarta.validation.Valid
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/piece")
@@ -31,5 +27,10 @@ class PieceController(
     @GetMapping("/problems")
     fun getPiece(@RequestParam pieceId: Long): ResponseDto<List<ProblemDto>> {
         return ResponseDto(pieceService.getPieceProblems(pieceId = pieceId))
+    }
+
+    @PutMapping("/problems")
+    fun checkCorrect(@RequestParam pieceId: Long, @RequestBody requestCheckCorrectDto: RequestCheckCorrectDto): ResponseDto<Unit> {
+        return ResponseDto(pieceService.checkCorrect(pieceId = pieceId, studentId = requestCheckCorrectDto.studentId, submittedAnswerList = requestCheckCorrectDto.submittedAnswerList))
     }
 }
