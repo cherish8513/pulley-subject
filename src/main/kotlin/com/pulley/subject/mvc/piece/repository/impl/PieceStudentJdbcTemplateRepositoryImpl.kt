@@ -22,8 +22,8 @@ class PieceStudentJdbcTemplateRepositoryImpl(
             jdbcTemplate.batchUpdate(sql, object : BatchPreparedStatementSetter {
                 override fun setValues(ps: PreparedStatement, i: Int) {
                     val entity = tbPieceStudentList[i]
-                    ps.setLong(1, entity.tbPieceStudentId.pieceId)
-                    ps.setLong(2, entity.tbPieceStudentId.studentId)
+                    ps.setLong(1, entity.pieceStudentId.pieceId)
+                    ps.setLong(2, entity.pieceStudentId.studentId)
                 }
 
                 override fun getBatchSize() = tbPieceStudentList.size

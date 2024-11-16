@@ -10,11 +10,11 @@ import java.io.Serializable
 @Entity
 class TbPieceProblem (
     @EmbeddedId
-    val tbPieceProblemId: TbPieceProblemId
+    val pieceProblemId: PieceProblemId
 )
 
 @Embeddable
-data class TbPieceProblemId(
+data class PieceProblemId(
     val pieceId: Long,
     val problemId: Long,
 ) : Serializable

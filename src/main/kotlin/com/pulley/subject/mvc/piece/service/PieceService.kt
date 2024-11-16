@@ -6,6 +6,7 @@ import com.pulley.subject.mvc.piece.dto.AddPieceDto
 import com.pulley.subject.mvc.piece.repository.PieceProblemRepository
 import com.pulley.subject.mvc.piece.repository.PieceRepository
 import com.pulley.subject.mvc.piece.repository.PieceStudentRepository
+import com.pulley.subject.mvc.problem.dto.ProblemDto
 import com.pulley.subject.mvc.problem.repository.ProblemRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -32,7 +33,7 @@ class PieceService(
 
         pieceProblemRepository.saveAll(addPieceDto.problemIdList
             .map {
-                TbPieceProblem(TbPieceProblemId(pieceId = savedPiece.pieceId.assertNotNull(), problemId = it))
+                TbPieceProblem(PieceProblemId(pieceId = savedPiece.pieceId.assertNotNull(), problemId = it))
             }
         )
     }
@@ -41,11 +42,23 @@ class PieceService(
         val piece = pieceRepository.findByUserIdAndPieceId(userId = userId, pieceId = pieceId).assertNotNull()
         pieceStudentRepository.saveAllIgnore(studentIds.map {
             TbPieceStudent(
-                tbPieceStudentId = TbPieceStudentId(
+                pieceStudentId = PieceStudentId(
                     pieceId = piece.pieceId.assertNotNull(),
                     studentId = it
                 )
             )
         })
+    }
+
+    fun getPieceProblems(pieceId: Long): List<ProblemDto> {
+        return problemRepository.findByPieceId(pieceId).map {
+            ProblemDto(
+                problemId = it.problemId.assertNotNull(),
+                answer = it.answer,
+                unitCode = it.unitCode,
+                problemType = it.problemType,
+                level = it.level
+            )
+        }
     }
 }

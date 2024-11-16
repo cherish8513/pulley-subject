@@ -336,3 +336,11 @@ insert into tb_problem(problem_id, unit_code, level, problem_type, answer) value
 (1531,'uc1548',3,'SELECTION',2);
 
 insert into tb_piece(piece_id, user_id, piece_name) values (1, 1, 'test');
+
+insert into tb_piece_problem(piece_id, problem_id) values
+(1, 1531),
+(1, 1516),
+(1, 1517),
+(1, 1518),
+(1, 1522),
+(1, 1526);

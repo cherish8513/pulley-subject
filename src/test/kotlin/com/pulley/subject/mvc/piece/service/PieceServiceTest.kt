@@ -43,4 +43,13 @@ class PieceServiceTest {
             studentIds = listOf(1L, 2L)
         )
     }
+
+    @Test
+    fun successGetPieceProblems() {
+        val testProblems = pieceService.getPieceProblems(pieceId = 1L)
+
+        testProblems.forEach {
+            println("problemId: ${it.problemId}")
+        }
+    }
 }
